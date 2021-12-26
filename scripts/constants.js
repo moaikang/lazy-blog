@@ -1,5 +1,4 @@
 const Header = `# DEV_MOAI 🧑‍💻<br>
----
 `;
 
 const Footer = `
@@ -12,9 +11,28 @@ const Footer = `
 </center>
 `;
 
+const CategoryHeader = `
+<center>
+Category
+</center>
+`.trim();
+
+const buildCategory = (categoryName) => {
+  return `
+  <details>
+    <summary>${categoryName}</summary>
+    <div markdown="1">😎숨겨진 내용😎</div>
+    <div markdown="2">ㅋㅋ</div>
+    <div markdown="2">ㅋㅋ</div>
+  </details>
+  `.trim();
+};
+
 const constants = {
   Header,
   Footer,
+  CategoryHeader,
+  buildCategory,
 };
 
-export default constants;
+module.exports = constants;

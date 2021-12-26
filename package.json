@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": ""
+    "test-build": "PRODUCTION=false node ./scripts/build.js",
+    "build": "PRODUCTION=true node ./scripts/build.js"
   },
   "keywords": [],
   "author": "",
