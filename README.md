@@ -1,4 +1,4 @@
-# DEV_MOAI 🧑‍💻<br>
+# Moai Dev Log 🧑‍💻<br>
 
 ### Infra
 <a href="/Users/keunwoo/Desktop/lazy-blog2/posts/Infra/S3.md">S3</a><br/>

@@ -1,4 +1,4 @@
-const Header = `# DEV_MOAI 🧑‍💻<br>
+const Header = `# Moai Dev Log 🧑‍💻<br>
 `;
 
 const Footer = `
