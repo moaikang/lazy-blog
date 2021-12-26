@@ -3,11 +3,10 @@ const path = require("path");
 
 const TreeBuilder = require("./CategoryBuilder");
 const { enter, removeMDPostFix } = require("./utils/Format");
-const constants = require("./constants");
 const { isDirectory } = require("./utils/File");
-const { Footer } = require("./constants");
-const IGNORED_DIR_OR_FILE_NAMES = ["assets", ".gitkeep"];
+const { Footer, Header } = require("./constants");
 
+const IGNORED_DIR_OR_FILE_NAMES = ["assets", ".gitkeep"];
 const isProduction = process.env.PRODUCTION === "true";
 
 const README_PATH = isProduction
@@ -22,7 +21,7 @@ if (isReadMeExist) {
 
 let content = "";
 
-content += enter(constants.Header);
+content += enter(Header);
 
 const postsPath = path.join(__dirname, "../posts");
 const postsCategories = fs.readdirSync(postsPath);
@@ -64,5 +63,11 @@ for (const category of postsCategories) {
 }
 
 content += Footer;
+
+function replaceAll(str, searchStr, replaceStr) {
+  return str.split(searchStr).join(replaceStr);
+}
+
+content = replaceAll(content, "/Users/keunwoo/Desktop/lazy-blog2/", "./");
 
 fs.writeFileSync(README_PATH, content);

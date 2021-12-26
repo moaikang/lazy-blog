@@ -1,10 +1,10 @@
 # Moai Dev Log 🧑‍💻<br>
 
 ### Infra
-<a href="/Users/keunwoo/Desktop/lazy-blog2/posts/Infra/S3.md">S3</a><br/>
+<a href="./posts/Infra/S3.md">S3</a><br/>
 ### Retrospect
 ### TypeScript
-<a href="/Users/keunwoo/Desktop/lazy-blog2/posts/TypeScript/Effective TypeScript/1장.md">[Effective TypeScript] 1장</a><br/>
+<a href="./posts/TypeScript/Effective TypeScript/1장.md">[Effective TypeScript] 1장</a><br/>
 ### Web
 
 ---
