@@ -22,12 +22,12 @@ class TreeBuilder {
     return this;
   }
 
-  addItem(itemName) {
+  addItem(itemName, displayName = null) {
     if (!this.isCategoryAdded()) {
       throw new Error(ERROR_MSG.MISSING_CATEGORY);
     }
 
-    this.tree += this.buildAnchorTag(itemName);
+    this.tree += this.buildAnchorTag(itemName, displayName);
 
     return this;
   }
@@ -46,11 +46,11 @@ class TreeBuilder {
     return this.tree.includes("### ");
   }
 
-  buildAnchorTag(itemName) {
+  buildAnchorTag(itemName, displayName) {
     return (
       `<a href="${this.filePathBase}/${formatSubCategory(
         this.subCategory
-      )}${itemName}.md">${itemName}</a>`.trim() + "<br/>"
+      )}${itemName}.md">${displayName ?? itemName}</a>`.trim() + "<br/>"
     );
   }
 

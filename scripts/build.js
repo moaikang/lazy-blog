@@ -8,10 +8,8 @@ const { isDirectory } = require("./utils/File");
 const { Footer } = require("./constants");
 const IGNORED_DIR_OR_FILE_NAMES = ["assets", ".gitkeep"];
 
-// 우선 먼저 데브모드인지 실제모드인지 확인한다.
 const isProduction = process.env.PRODUCTION === "true";
 
-// 데브 모드라면 README-TEST.md 에다 작성하고, 실제 모드라면 README.md 에 작성
 const README_PATH = isProduction
   ? path.join(__dirname, "../README.md")
   : path.join(__dirname, "../README_TEST.md");
@@ -50,7 +48,7 @@ for (const category of postsCategories) {
       for (const subPost of subPosts) {
         const subPostNameWithoutMDPostFix = removeMDPostFix(subPost);
         const title = `[${subCategory}] ${subPostNameWithoutMDPostFix}`;
-        treeBuilder.addItem(title);
+        treeBuilder.addItem(subPostNameWithoutMDPostFix, title);
       }
 
       treeBuilder.resetSubCategory();
@@ -67,5 +65,4 @@ for (const category of postsCategories) {
 
 content += Footer;
 
-// 콘텐트를 찍어낸다.
 fs.writeFileSync(README_PATH, content);
