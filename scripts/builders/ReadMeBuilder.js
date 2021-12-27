@@ -1,3 +1,5 @@
+const path = require("path");
+
 class ReadMeBuilder {
   contentStack = [];
 
@@ -7,7 +9,9 @@ class ReadMeBuilder {
 
   build() {
     const contents = this.contentStack.join("\n");
-    return contents.split("/Users/keunwoo/Desktop/lazy-blog2/").join("./");
+    const rootAbsolutePath = path.join(__dirname, "../", "../");
+
+    return contents.split(rootAbsolutePath).join("./");
   }
 }
 

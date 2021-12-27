@@ -6,7 +6,6 @@
 ### TypeScript
 <a href="./posts/TypeScript/Effective TypeScript/1장.md">[Effective TypeScript] 1장</a><br/>
 ### Web
-
 ---
 
 <div align="center">
