@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-const TreeBuilder = require("./CategoryBuilder");
-const { enter, removeMDPostFix } = require("./utils/Format");
+const ReadMeBuilder = require("./ReadMeBuilder");
+const PostsBuilder = require("./PostsBuilder");
+const { removeMDPostFix } = require("./utils/Format");
 const { isDirectory } = require("./utils/File");
 const { Footer, Header } = require("./constants");
 
@@ -19,9 +20,8 @@ if (isReadMeExist) {
   fs.unlinkSync(README_PATH);
 }
 
-let content = "";
-
-content += enter(Header);
+const readMeBuilder = new ReadMeBuilder();
+readMeBuilder.add(Header);
 
 const postsPath = path.join(__dirname, "../posts");
 const postsCategories = fs.readdirSync(postsPath);
@@ -29,9 +29,9 @@ const postsCategories = fs.readdirSync(postsPath);
 for (const category of postsCategories) {
   const postCategoryDirName = path.join(postsPath, category);
   const postFileNames = fs.readdirSync(postCategoryDirName);
+  const postsBuilder = new PostsBuilder(postCategoryDirName);
 
-  const treeBuilder = new TreeBuilder(postCategoryDirName);
-  treeBuilder.addCategory(category);
+  postsBuilder.addCategory(category);
 
   for (const postFileName of postFileNames) {
     if (IGNORED_DIR_OR_FILE_NAMES.includes(postFileName)) continue;
@@ -40,34 +40,26 @@ for (const category of postsCategories) {
 
     if (isDirectory(postFilePath)) {
       const subCategory = postFileName;
-      treeBuilder.setSubCategory(subCategory);
+      postsBuilder.setSubCategory(subCategory);
 
-      const subPosts = fs.readdirSync(postFilePath);
+      const subPostNames = fs.readdirSync(postFilePath);
 
-      for (const subPost of subPosts) {
-        const subPostNameWithoutMDPostFix = removeMDPostFix(subPost);
-        const title = `[${subCategory}] ${subPostNameWithoutMDPostFix}`;
-        treeBuilder.addItem(subPostNameWithoutMDPostFix, title);
+      for (const subPostName of subPostNames) {
+        postsBuilder.addSubItem(subPostName);
       }
 
-      treeBuilder.resetSubCategory();
+      postsBuilder.resetSubCategory();
     } else {
-      const postNameWithoutMDPostFix = removeMDPostFix(postFileName);
-      treeBuilder.addItem(postNameWithoutMDPostFix);
+      postsBuilder.addItem(postFileName);
     }
   }
 
-  const treeResult = treeBuilder.build();
+  const posts = postsBuilder.build();
 
-  content += enter(treeResult);
+  readMeBuilder.add(posts);
 }
 
-content += Footer;
-
-function replaceAll(str, searchStr, replaceStr) {
-  return str.split(searchStr).join(replaceStr);
-}
-
-content = replaceAll(content, "/Users/keunwoo/Desktop/lazy-blog2/", "./");
+readMeBuilder.add(Footer);
+const content = readMeBuilder.build();
 
 fs.writeFileSync(README_PATH, content);
