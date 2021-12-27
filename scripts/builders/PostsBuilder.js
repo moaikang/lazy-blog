@@ -1,4 +1,4 @@
-const { enter, removeMDPostFix } = require("./utils/Format");
+const { enter, removeMDPostFix } = require("../utils/Format");
 
 const UNINITIALIZED_MARKDOWN_VALUE = -1;
 const UNINITIALIZED_POSTS_VALUE = "";

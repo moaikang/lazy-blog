@@ -1,11 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const ReadMeBuilder = require("./ReadMeBuilder");
-const PostsBuilder = require("./PostsBuilder");
-const { removeMDPostFix } = require("./utils/Format");
+const ReadMeBuilder = require("./builders/ReadMeBuilder");
+const PostsBuilder = require("./builders/PostsBuilder");
 const { isDirectory } = require("./utils/File");
-const { Footer, Header } = require("./constants");
+const constants = require("./constants");
 
 const IGNORED_DIR_OR_FILE_NAMES = ["assets", ".gitkeep"];
 const isProduction = process.env.PRODUCTION === "true";
@@ -21,7 +20,7 @@ if (isReadMeExist) {
 }
 
 const readMeBuilder = new ReadMeBuilder();
-readMeBuilder.add(Header);
+readMeBuilder.add(constants.Header);
 
 const postsPath = path.join(__dirname, "../posts");
 const postsCategories = fs.readdirSync(postsPath);
@@ -59,7 +58,7 @@ for (const category of postsCategories) {
   readMeBuilder.add(posts);
 }
 
-readMeBuilder.add(Footer);
+readMeBuilder.add(constants.Footer);
 const content = readMeBuilder.build();
 
 fs.writeFileSync(README_PATH, content);

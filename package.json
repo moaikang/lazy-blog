@@ -1,13 +1,13 @@
 {
   "name": "lazy-blog",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "개발자 근우의 블로그",
+  "main": "README.md",
   "scripts": {
     "test-build": "PRODUCTION=false node ./scripts/build.js",
     "build": "PRODUCTION=true node ./scripts/build.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "moaikang",
   "license": "ISC"
 }
